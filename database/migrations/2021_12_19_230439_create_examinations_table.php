@@ -14,9 +14,15 @@ class CreateExaminationsTable extends Migration
     public function up()
     {
         Schema::create('examinations', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('exam_registration_id');
-            $table->unsignedBigInteger('lecture_id')->nullable();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('exam_registration_id')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreignUuid('lecture_id')
+                ->references('id')->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('position_as')->nullable();
             $table->integer('position_order')->nullable();
             $table->unsignedTinyInteger('score_1')->nullable();
@@ -27,10 +33,6 @@ class CreateExaminationsTable extends Migration
             $table->unsignedDecimal('score',4,2)->nullable();
             $table->timestamps();
 
-            $table->foreign('exam_registration_id')->references('id')->on('exam_registrations')
-                ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('lecture_id')->references('id')->on('users')
-                ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -41,10 +43,8 @@ class CreateExaminationsTable extends Migration
      */
     public function down()
     {
-        Schema::table('examinations', function (Blueprint $table) {
-            $table->dropForeign(['exam_registration_id']);
-            $table->dropForeign(['lecture_id']);
+        Schema::dropIfExists('examinations', function (Blueprint $table) {
+            $table->dropForeign(['exam_registration_id','lecture_id']);
         });
-        Schema::dropIfExists('examinations');
     }
 }

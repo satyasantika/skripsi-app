@@ -14,6 +14,7 @@ class UpdateUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->uuid('id')->change();
             $table->string('username')->unique()->after('name');
             $table->string('phone')->nullable()->after('password');
             $table->text('address')->nullable()->after('phone');

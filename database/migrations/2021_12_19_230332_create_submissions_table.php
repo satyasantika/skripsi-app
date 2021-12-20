@@ -14,14 +14,14 @@ class CreateSubmissionsTable extends Migration
     public function up()
     {
         Schema::create('submissions', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('student_id');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('student_id')
+                ->references('id')->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->text('title')->nullable();
             $table->string('document')->nullable();
             $table->timestamps();
-
-            $table->foreign('student_id')->references('id')->on('users')
-                ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -32,9 +32,8 @@ class CreateSubmissionsTable extends Migration
      */
     public function down()
     {
-        Schema::table('submissions', function (Blueprint $table) {
+        Schema::dropIfExists('submissions', function (Blueprint $table) {
             $table->dropForeign(['student_id']);
         });
-        Schema::dropIfExists('submissions');
     }
 }

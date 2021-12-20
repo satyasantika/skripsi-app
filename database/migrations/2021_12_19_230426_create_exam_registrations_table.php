@@ -14,18 +14,17 @@ class CreateExamRegistrationsTable extends Migration
     public function up()
     {
         Schema::create('exam_registrations', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('student_id');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('student_id')
+                ->references('id')->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('exam_type');
             $table->unsignedTinyInteger('exam_order')->default(1);
             $table->text('title');
             $table->dateTime('exam_at')->nullable();
             $table->string('room')->nullable();
             $table->timestamps();
-
-            $table->foreign('student_id')->references('id')->on('users')
-                ->onUpdate('cascade')->onDelete('cascade');
-
         });
     }
 
@@ -36,9 +35,8 @@ class CreateExamRegistrationsTable extends Migration
      */
     public function down()
     {
-        Schema::table('exam_registrations', function (Blueprint $table) {
+        Schema::dropIfExists('exam_registrations', function (Blueprint $table) {
             $table->dropForeign(['student_id']);
         });
-        Schema::dropIfExists('exam_registrations');
     }
 }

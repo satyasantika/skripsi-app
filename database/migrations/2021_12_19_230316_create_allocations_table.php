@@ -14,16 +14,16 @@ class CreateAllocationsTable extends Migration
     public function up()
     {
         Schema::create('allocations', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('lecture_id');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('lecture_id')
+                ->references('id')->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->unsignedTinyInteger('guide_1');
             $table->unsignedTinyInteger('guide_2');
             $table->unsignedTinyInteger('guide_all');
             $table->unsignedTinyInteger('examinator');
             $table->timestamps();
-
-            $table->foreign('lecture_id')->references('id')->on('users')
-                ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -34,9 +34,8 @@ class CreateAllocationsTable extends Migration
      */
     public function down()
     {
-        Schema::table('allocations', function (Blueprint $table) {
+        Schema::dropIfExists('allocations', function (Blueprint $table) {
             $table->dropForeign(['lecture_id']);
         });
-        Schema::dropIfExists('allocations');
     }
 }
