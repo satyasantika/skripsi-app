@@ -20,3 +20,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/changePassword',[App\Http\Controllers\Auth\ChangePasswordController::class, 'showChangePasswordGet'])->name('changePasswordGet');
+    Route::post('/changePassword',[App\Http\Controllers\Auth\ChangePasswordController::class, 'changePasswordPost'])->name('changePasswordPost');
+});
