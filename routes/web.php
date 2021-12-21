@@ -25,3 +25,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/changePassword',[App\Http\Controllers\Auth\ChangePasswordController::class, 'showChangePasswordGet'])->name('changePasswordGet');
     Route::post('/changePassword',[App\Http\Controllers\Auth\ChangePasswordController::class, 'changePasswordPost'])->name('changePasswordPost');
 });
+Route::group(['middleware' => 'auth'], function() {
+    Route::resource('submission',App\Http\Controllers\Student\SubmissionController::class);
+});
+
+
