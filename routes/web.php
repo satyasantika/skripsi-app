@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('welcome');
 
 Auth::routes();
 
@@ -24,9 +22,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/changePassword',[App\Http\Controllers\Auth\ChangePasswordController::class, 'showChangePasswordGet'])->name('changePasswordGet');
     Route::post('/changePassword',[App\Http\Controllers\Auth\ChangePasswordController::class, 'changePasswordPost'])->name('changePasswordPost');
-});
-Route::group(['middleware' => 'auth'], function() {
     Route::resource('submission',App\Http\Controllers\Student\SubmissionController::class);
+});
+Route::middleware(['auth'])->group(function() {
+    Route::get('/mahasiswa', App\Http\Controllers\Student\DasboardController::class)->name('mahasiswa.home');
 });
 
 
