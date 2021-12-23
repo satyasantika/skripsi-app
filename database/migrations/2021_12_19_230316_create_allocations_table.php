@@ -23,6 +23,7 @@ class CreateAllocationsTable extends Migration
             $table->unsignedTinyInteger('guide_2');
             $table->unsignedTinyInteger('guide_all');
             $table->unsignedTinyInteger('examinator');
+            $table->unsignedSmallInteger('year');
             $table->timestamps();
         });
     }

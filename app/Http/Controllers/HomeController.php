@@ -25,6 +25,9 @@ class HomeController extends Controller
         if ($role === 'dosen') {
             return redirect()->route('dosen.home');
         }
+        if ($role === 'jurusan') {
+            return redirect()->route('jurusan.home');
+        }
         return view('home');
     }
 }

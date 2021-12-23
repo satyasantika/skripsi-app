@@ -20,6 +20,7 @@ class RolePermissionSeeder extends Seeder
         Role::create(['name' => 'mahasiswa']);
         Role::create(['name' => 'sekjur']);
         Role::create(['name' => 'kajur']);
+        Role::create(['name' => 'jurusan']);
 
         Permission::create(['name' => 'menambah ajuan judul'])->assignRole('mahasiswa');
         Permission::create(['name' => 'menghapus ajuan judul'])->assignRole('mahasiswa');

@@ -32,3 +32,7 @@ Route::middleware(['auth','role:dosen'])->group(function() {
     Route::get('/dosen', App\Http\Controllers\Lecture\DasboardController::class)->name('dosen.home');
     Route::resource('guidedecision',App\Http\Controllers\Lecture\GuideDecisionController::class)->only(['edit','update']);
 });
+Route::middleware(['auth','role:jurusan'])->group(function() {
+    Route::get('/jurusan', App\Http\Controllers\Departement\DasboardController::class)->name('jurusan.home');
+    Route::resource('allocation',App\Http\Controllers\Departement\AllocationController::class)->except('show');
+});
