@@ -24,7 +24,10 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-auto">
+                            {{-- Tombol pilih pembimbing --}}
+                            @if ($guidesubmissions->count() < 2)
                             <a href="{{ route('guidesubmission.create',$submission) }}" class="btn btn-primary">Pilih Pembimbing</a>
+                            @endif
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -35,7 +38,7 @@
                                         <th></th>
                                         <th>Nama Dosen</th>
                                         <th>Status Ajuan</th>
-                                        <th>Status Pembimbing</th>
+                                        <th>Urutan Pembimbing</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -43,15 +46,20 @@
                                     <tr>
                                         <td><a href="{{ route('guidesubmission.edit',$guidesubmission) }}" class="btn btn-sm btn-primary">edit</a></td>
                                         <td>{{ $guidesubmission->user->name }}</td>
-                                        <td>@if ($guidesubmission->is_approve === NULL)
-                                            <span class="badge badge-warning">Menunggu...</span>
-                                            @elseif ($guidesubmission->is_approve === true)
-                                            <span class="badge badge-success">Diterima</span>
+                                        <td>@if (is_null($guidesubmission->is_approve))
+                                            <span class="bg-warning">Menunggu...</span>
+                                            @elseif ($guidesubmission->is_approve)
+                                            <span class="bg-success">Diterima</span>
                                             @else
-                                            <span class="badge badge-danger">Ditolak</span>
+                                            <span class="bg-danger">Ditolak</span>
                                             @endif
                                         </td>
-                                        <td>{{ $guidesubmission->guide_order }}</td>
+                                        <td>@if (is_null($guidesubmission->guide_order))
+                                            <span class="bg-warning">Menunggu DBS...</span>
+                                            @else
+                                            {{ $guidesubmission->guide_order }}
+                                            @endif
+                                        </td>
                                     </tr>
                                     @empty
                                     <tr>

@@ -39,23 +39,22 @@ class GuideSubmissionController extends Controller
         //
     }
 
-    public function edit(Guide $guide)
+    public function edit(Guide $guidesubmission)
     {
         $lectures = User::role('dosen')->get();
-        $guidesubmission = $guide;
         return view('student.guidesubmission.edit',compact('guidesubmission','lectures'));
     }
 
-    public function update(Request $request, Guide $guide)
+    public function update(Request $request, Guide $guidesubmission)
     {
         $input = $request->all();
-        $guide->update($input);
+        $guidesubmission->update($input);
         return $this->index();
     }
 
-    public function destroy(Guide $guide)
+    public function destroy(Guide $guidesubmission)
     {
-        $guide->delete();
+        $guidesubmission->delete();
         return $this->index();
     }
 }
