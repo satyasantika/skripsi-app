@@ -42,7 +42,10 @@
             </div>
             {{-- Ajuan Judul Penelitian --}}
             <div class="card mt-2">
-                <div class="card-header">{{ __('Usulan Penelitian Anda') }}</div>
+                <div class="card-header">
+                    {{ __('Usulan Penelitian Anda') }}
+                    <a href="{{ route('submission.index') }}" class="btn btn-sm btn-primary float-end">Edit Usulan</a>
+                </div>
                 <div class="card-body">
                 @if ($submission==null)
                 <a href="{{ route('submission.index') }}" class="btn btn-primary mt-2">Usulkan Judul</a>
@@ -62,7 +65,7 @@
                 <div class="row mb-3">
                     <label for="title" class="col-md-4 col-form-label text-md-right"></label>
                     <div class="col-md-6">
-                        <a href="{{ route('submission.edit',$submission) }}" class="btn btn-primary">Edit</a>
+
                     </div>
                 </div>
                 @endif

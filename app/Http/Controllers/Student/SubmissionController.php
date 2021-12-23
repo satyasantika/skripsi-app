@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Student;
 
+use App\Models\Guide;
 use App\Models\Submission;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,7 +17,9 @@ class SubmissionController extends Controller
         if ($submission->doesntExist()) {
             return redirect()->route('submission.create');
         }
-        return view('student.submission.home',['submission'=>$submission->first()]);
+        $submission = $submission->first();
+        $guidesubmissions = Guide::where('submission_id',$submission->id)->get();
+        return view('student.submission.home',compact('submission','guidesubmissions'));
     }
 
     public function create()
@@ -44,7 +47,7 @@ class SubmissionController extends Controller
 
     public function edit(Submission $submission)
     {
-        return view('student.submission.edit',['submission'=>$submission]);
+        return view('student.submission.edit',compact('submission'));
     }
 
     public function update(Request $request, Submission $submission)

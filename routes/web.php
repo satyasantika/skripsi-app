@@ -22,10 +22,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/changePassword',[App\Http\Controllers\Auth\ChangePasswordController::class, 'showChangePasswordGet'])->name('changePasswordGet');
     Route::post('/changePassword',[App\Http\Controllers\Auth\ChangePasswordController::class, 'changePasswordPost'])->name('changePasswordPost');
-    Route::resource('submission',App\Http\Controllers\Student\SubmissionController::class);
 });
-Route::middleware(['auth'])->group(function() {
+Route::middleware(['auth','role:mahasiswa'])->group(function() {
     Route::get('/mahasiswa', App\Http\Controllers\Student\DasboardController::class)->name('mahasiswa.home');
+    Route::resource('submission',App\Http\Controllers\Student\SubmissionController::class)->except('show');
+    Route::resource('guidesubmission',App\Http\Controllers\Student\GuideSubmissionController::class)->except('show');
 });
-
-
