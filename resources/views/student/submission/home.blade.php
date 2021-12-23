@@ -47,11 +47,11 @@
                                         <td><a href="{{ route('guidesubmission.edit',$guidesubmission) }}" class="btn btn-sm btn-primary">edit</a></td>
                                         <td>{{ $guidesubmission->user->name }}</td>
                                         <td>@if (is_null($guidesubmission->is_approve))
-                                            <span class="bg-warning">Menunggu...</span>
+                                            <span class="badge bg-warning">Menunggu respons...</span>
                                             @elseif ($guidesubmission->is_approve)
-                                            <span class="bg-success">Diterima</span>
+                                            <span class="badge bg-success">Ajuan Diterima</span>
                                             @else
-                                            <span class="bg-danger">Ditolak</span>
+                                            <span class="badge bg-danger">Ajuan Ditolak</span>
                                             @endif
                                         </td>
                                         <td>@if (is_null($guidesubmission->guide_order))

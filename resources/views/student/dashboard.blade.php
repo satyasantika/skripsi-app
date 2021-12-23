@@ -63,9 +63,20 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="title" class="col-md-4 col-form-label text-md-right"></label>
+                    <label for="title" class="col-md-4 col-form-label text-md-right">Calon Pembimbing</label>
                     <div class="col-md-6">
-
+                        @forelse ($guidesubmissions as $guidesubmission)
+                            {{ $guidesubmission->user->name }}
+                            @if (is_null($guidesubmission->is_approve))
+                            <span class="badge bg-warning">Menunggu respon...</span>
+                            @elseif ($guidesubmission->is_approve)
+                            <span class="badge bg-success">Ajuan Diterima</span>
+                            @else
+                            <span class="badge bg-danger">Ajuan Ditolak</span>
+                            @endif
+                        @empty
+                            Belum ada pengusulan
+                        @endforelse
                     </div>
                 </div>
                 @endif

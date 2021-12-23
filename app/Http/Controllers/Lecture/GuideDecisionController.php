@@ -17,16 +17,18 @@ class GuideDecisionController extends Controller
     public function update(Request $request, Guide $guidedecision)
     {
         $lecture_id = $guidedecision->lecture_id;
-        // $guides = Guide::where('lecture_id',$lecture_id)->count();
-        // if ($this->_quota() > 0) {
-            $input = $request->all();
-            if ($request->is_approve == "null") {
-                $input['is_approve'] = null;
-            }
-            $guidedecision->update($input);
-        // } else {
-        //     $this->_declineAll($lecture_id);
-        // }
+        // AJUAN DITOLAK JIKA KUOTA SUDAH KOSONG
+        if ($this->_quota($lecture_id) == 0 ) {
+            $this->_declineAll($lecture_id);
+        }
+
+        $input = $request->all();
+        // PROSES RESET
+        if ($request->is_approve == "null") {
+            $input['is_approve'] = null;
+        }
+        $guidedecision->update($input);
+
         return redirect()->route('home');
     }
 

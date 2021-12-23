@@ -12,14 +12,15 @@ class DasboardController extends Controller
     public function __invoke()
     {
         $user = Auth::user();
-        // if ($this->_quota() > 0) {
+        // dd($this->_quota($user->id));
+        if ($this->_quota($user->id) > 0) {
             $guides = Guide::where('lecture_id',$user->id)->latest()->get();
-        // } else {
-        //     $guides = Guide::where([
-        //             ['lecture_id','=',$lecture_id],
-        //             ['is_approve','=','1']
-        //             ])->latest()->get();
-        // }
+        } else {
+            $guides = Guide::where([
+                    ['lecture_id','=',$user->id],
+                    ['is_approve','=','1']
+                    ])->latest()->get();
+        }
         return view('lecture.dashboard',compact('user','guides'));
     }
 
