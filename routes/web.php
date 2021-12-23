@@ -28,3 +28,7 @@ Route::middleware(['auth','role:mahasiswa'])->group(function() {
     Route::resource('submission',App\Http\Controllers\Student\SubmissionController::class)->except('show');
     Route::resource('guidesubmission',App\Http\Controllers\Student\GuideSubmissionController::class)->except('show');
 });
+Route::middleware(['auth','role:dosen'])->group(function() {
+    Route::get('/dosen', App\Http\Controllers\Lecture\DasboardController::class)->name('dosen.home');
+    Route::resource('guidedecision',App\Http\Controllers\Lecture\GuideDecisionController::class)->only(['edit','update']);
+});
