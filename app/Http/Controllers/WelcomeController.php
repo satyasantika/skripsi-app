@@ -13,7 +13,7 @@ class WelcomeController extends Controller
             $role = Auth::user()->getRoleNames()->first();
             return $this->_toHome($role);
         }
-        return view('welcome');
+        return view('auth.login');
     }
 
     private function _toHome($role)

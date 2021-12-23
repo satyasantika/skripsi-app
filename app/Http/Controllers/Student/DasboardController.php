@@ -13,7 +13,12 @@ class DasboardController extends Controller
     {
         $user = Auth::user();
         $submission = Submission::where('student_id',$user->id)->first();
-        $guidesubmissions = Guide::where('submission_id',$submission->id)->get();
+        if (is_null($submission)) {
+            $guidesubmissions = null;
+        } else {
+            $guidesubmissions = Guide::where('submission_id',$submission->id)->get();
+        }
+
 
         return view('student.dashboard',compact('user','submission','guidesubmissions'));
     }

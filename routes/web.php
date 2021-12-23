@@ -36,3 +36,7 @@ Route::middleware(['auth','role:jurusan'])->group(function() {
     Route::get('/jurusan', App\Http\Controllers\Departement\DasboardController::class)->name('jurusan.home');
     Route::resource('allocation',App\Http\Controllers\Departement\AllocationController::class)->except('show');
 });
+Route::middleware(['auth','role:admin'])->group(function() {
+    Route::get('/admin', App\Http\Controllers\Admin\DasboardController::class)->name('admin.home');
+    // Route::resource('allocation',App\Http\Controllers\Departement\AllocationController::class)->except('show');
+});
