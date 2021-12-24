@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <div class="row mb-3">
                         <div class="col-md-auto">
-                            {{-- <a href="{{ route('user.index') }}" class="btn btn-primary">Penetapan Kuota Pembimbing</a> --}}
+                            <a href="{{ route('user.index') }}" class="btn btn-primary">Tabel Pengguna</a>
                         </div>
                     </div>
                 </div>
