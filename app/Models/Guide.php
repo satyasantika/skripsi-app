@@ -20,4 +20,9 @@ class Guide extends Model
     {
         return $this->belongsTo(Submission::class);
     }
+
+    public function guide_group()
+    {
+        return $this->belongsTo(GuideGroup::class);
+    }
 }

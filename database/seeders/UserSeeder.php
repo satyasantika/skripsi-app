@@ -4,8 +4,9 @@ namespace Database\Seeders;
 
 use App\Imports\UsersImport;
 use Illuminate\Database\Seeder;
-use App\Imports\AllocationsImport;
+use App\Imports\GuideGroupsImport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\GuideAllocationsImport;
 
 class UserSeeder extends Seeder
 {
@@ -20,7 +21,9 @@ class UserSeeder extends Seeder
         // $filename = base_path().'/database/seeders/csv/common.csv';
         Excel::import(new UsersImport, $filename);
         $filename = base_path().'/database/seeders/csv/allocations.csv';
-        Excel::import(new AllocationsImport, $filename);
+        Excel::import(new GuideAllocationsImport, $filename);
+        $filename = base_path().'/database/seeders/csv/groups.csv';
+        Excel::import(new GuideGroupsImport, $filename);
         $filename = base_path().'/database/seeders/csv/students.csv';
         Excel::import(new UsersImport, $filename);
     }

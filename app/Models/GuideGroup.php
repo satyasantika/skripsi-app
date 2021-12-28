@@ -6,13 +6,13 @@ use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Guidance extends Model
+class GuideGroup extends Model
 {
     use Uuids, HasFactory;
     protected $guarded = [];
 
-    public function guide()
+    public function guide_allocation()
     {
-        return $this->belongsTo(Guide::class);
+        return $this->belongsTo(GuideAllocation::class);
     }
 }

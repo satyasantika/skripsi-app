@@ -6,7 +6,7 @@ use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Allocation extends Model
+class GuideAllocation extends Model
 {
     use Uuids, HasFactory;
     protected $guarded = [];

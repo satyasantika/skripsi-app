@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAllocationsTable extends Migration
+class CreateGuideGroupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,15 @@ class CreateAllocationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('allocations', function (Blueprint $table) {
+        Schema::create('guide_groups', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('lecture_id')
-                ->references('id')->on('users')
+            $table->foreignUuid('guide_allocation_id')
+                ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->unsignedTinyInteger('guide_1');
             $table->unsignedTinyInteger('guide_2');
-            $table->unsignedTinyInteger('guide_all');
-            $table->unsignedTinyInteger('examinator');
-            $table->unsignedSmallInteger('year');
+            $table->unsignedTinyInteger('group');
             $table->timestamps();
         });
     }
@@ -35,8 +33,8 @@ class CreateAllocationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('allocations', function (Blueprint $table) {
-            $table->dropForeign(['lecture_id']);
+        Schema::dropIfExists('guide_groups', function (Blueprint $table) {
+            $table->dropForeign(['guide_allocation_id']);
         });
     }
 }

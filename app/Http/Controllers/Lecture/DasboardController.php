@@ -12,7 +12,6 @@ class DasboardController extends Controller
     public function __invoke()
     {
         $user = Auth::user();
-        // dd($this->_quota($user->id));
         if ($this->_quota($user->id) > 0) {
             $guides = Guide::where('lecture_id',$user->id)->latest()->get();
         } else {
