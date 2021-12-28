@@ -16,16 +16,17 @@ class RolePermissionSeeder extends Seeder
     public function run()
     {
         Role::create(['name' => 'admin']);
-        Role::create(['name' => 'dosen']);
-        Role::create(['name' => 'mahasiswa']);
-        Role::create(['name' => 'sekjur']);
-        Role::create(['name' => 'kajur']);
-        Role::create(['name' => 'jurusan']);
+        Role::create(['name' => 'lecture']);
+        Role::create(['name' => 'student']);
+        Role::create(['name' => 'council']);
 
-        Permission::create(['name' => 'menambah ajuan judul'])->assignRole('mahasiswa');
-        Permission::create(['name' => 'menghapus ajuan judul'])->assignRole('mahasiswa');
-        Permission::create(['name' => 'menyetujui ajuan judul'])->assignRole('dosen');
-        Permission::create(['name' => 'menolak ajuan judul'])->assignRole('dosen');
-        Permission::create(['name' => 'menetapkan pembimbing'])->syncRoles(['kajur','sekjur']);
+        Permission::create(['name' => 'add submission'])->assignRole('student');
+        Permission::create(['name' => 'delete submission'])->assignRole('student');
+        Permission::create(['name' => 'approve submisison'])->assignRole('lecture');
+        Permission::create(['name' => 'decline submission'])->assignRole('lecture');
+        Permission::create(['name' => 'add guide allocation'])->assignRole('council');
+        Permission::create(['name' => 'delete guide allocation'])->assignRole('council');
+        Permission::create(['name' => 'add guide group allocation'])->assignRole('council');
+        Permission::create(['name' => 'delete guide group allocation'])->assignRole('council');
     }
 }

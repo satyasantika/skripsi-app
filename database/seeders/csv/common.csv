@@ -1,5 +1,6 @@
-052151001,"mahasiswa 1 satya",08xxx,052151001@student.unsil.ac.id,tamara D6,321654987,mahasiswa
-052151002,"mahasiswa 2 satya",08xxx,052151002@student.unsil.ac.id,tamara D6,321654987,mahasiswa
-052151003,"mahasiswa 3 satya",08xxx,052151003@student.unsil.ac.id,tamara D6,321654987,mahasiswa
-0027118602,"dosen satya",08xxx,0027118602@unsil.ac.id,tamara D6,321654987,dosen
-jurusan,"jurusan satya",08xxx,jurusan@unsil.ac.id,tamara D6,321654987,jurusan
+admin,"Super Admin",NULL,mat@unsil.ac.id,NULL,satyasantikakotatasikmalayarepublikindonesia,admin
+student1,"student 1 satya",08xxx,052151001@student.unsil.ac.id,tamara D6,321654987,student
+student2,"student 2 satya",08xxx,052151002@student.unsil.ac.id,tamara D6,321654987,student
+student3,"student 3 satya",08xxx,052151003@student.unsil.ac.id,tamara D6,321654987,student
+lecture,"lecture satya",08xxx,0027118602@unsil.ac.id,tamara D6,321654987,lecture
+council,"council satya",08xxx,council@unsil.ac.id,tamara D6,321654987,council

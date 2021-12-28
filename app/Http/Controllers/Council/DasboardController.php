@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Departement;
+namespace App\Http\Controllers\council;
 
 use App\Models\Guide;
-use App\Models\Allocation;
+use App\Models\GuideAllocation;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,6 +11,6 @@ class DasboardController extends Controller
 {
     public function __invoke()
     {
-        return view('departement.dashboard');
+        return view('council.dashboard');
     }
 }

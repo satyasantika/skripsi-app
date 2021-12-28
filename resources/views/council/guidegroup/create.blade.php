@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Form Usulan Judul') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('allocation.store') }}">
+                    <form method="POST" action="{{ route('guidegroup.store') }}">
                         @csrf
 
                         <div class="row mb-3">

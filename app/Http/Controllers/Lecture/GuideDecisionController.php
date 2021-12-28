@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Lecture;
 
 use App\Models\Guide;
-use App\Models\Allocation;
+use App\Models\GuideAllocation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

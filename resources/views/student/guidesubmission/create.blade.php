@@ -16,8 +16,8 @@
 
                             <div class="col-md-6">
                                 <select id="title" name="lecture_id" class="form-select" aria-label="Default select example" required>
-                                    @foreach ($lectures as $dosen)
-                                        <option value="{{ $dosen->id }}">{{ $dosen->name }}</option>
+                                    @foreach ($lectures as $lecture)
+                                        <option value="{{ $lecture->id }}">{{ $lecture->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

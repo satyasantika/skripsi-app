@@ -19,14 +19,14 @@ class HomeController extends Controller
         if ($role === 'admin') {
             return redirect()->route('admin.home');
         }
-        if ($role === 'mahasiswa') {
-            return redirect()->route('mahasiswa.home');
+        if ($role === 'student') {
+            return redirect()->route('student.home');
         }
-        if ($role === 'dosen') {
-            return redirect()->route('dosen.home');
+        if ($role === 'lecture') {
+            return redirect()->route('lecture.home');
         }
-        if ($role === 'jurusan') {
-            return redirect()->route('jurusan.home');
+        if ($role === 'council') {
+            return redirect()->route('council.home');
         }
         return view('home');
     }

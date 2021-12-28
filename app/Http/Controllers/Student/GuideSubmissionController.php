@@ -18,7 +18,7 @@ class GuideSubmissionController extends Controller
 
     public function create()
     {
-        $lectures = User::role('dosen')->get();
+        $lectures = User::role('lecture')->get();
         return view('student.guidesubmission.create',compact('lectures'));
     }
 
@@ -41,7 +41,7 @@ class GuideSubmissionController extends Controller
 
     public function edit(Guide $guidesubmission)
     {
-        $lectures = User::role('dosen')->get();
+        $lectures = User::role('lecture')->get();
         return view('student.guidesubmission.edit',compact('guidesubmission','lectures'));
     }
 

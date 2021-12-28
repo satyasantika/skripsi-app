@@ -23,18 +23,19 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/changePassword',[App\Http\Controllers\Auth\ChangePasswordController::class, 'showChangePasswordGet'])->name('changePasswordGet');
     Route::post('/changePassword',[App\Http\Controllers\Auth\ChangePasswordController::class, 'changePasswordPost'])->name('changePasswordPost');
 });
-Route::middleware(['auth','role:mahasiswa'])->group(function() {
-    Route::get('/mahasiswa', App\Http\Controllers\Student\DasboardController::class)->name('mahasiswa.home');
+Route::middleware(['auth','role:student'])->group(function() {
+    Route::get('/student', App\Http\Controllers\Student\DasboardController::class)->name('student.home');
     Route::resource('submission',App\Http\Controllers\Student\SubmissionController::class)->except('show');
     Route::resource('guidesubmission',App\Http\Controllers\Student\GuideSubmissionController::class)->except('show');
 });
-Route::middleware(['auth','role:dosen'])->group(function() {
-    Route::get('/dosen', App\Http\Controllers\Lecture\DasboardController::class)->name('dosen.home');
+Route::middleware(['auth','role:lecture'])->group(function() {
+    Route::get('/lecture', App\Http\Controllers\Lecture\DasboardController::class)->name('lecture.home');
     Route::resource('guidedecision',App\Http\Controllers\Lecture\GuideDecisionController::class)->only(['edit','update']);
 });
-Route::middleware(['auth','role:jurusan'])->group(function() {
-    Route::get('/jurusan', App\Http\Controllers\Departement\DasboardController::class)->name('jurusan.home');
-    Route::resource('allocation',App\Http\Controllers\Departement\AllocationController::class)->except('show');
+Route::middleware(['auth','role:council'])->group(function() {
+    Route::get('/council', App\Http\Controllers\Council\DasboardController::class)->name('council.home');
+    Route::resource('guideallocation',App\Http\Controllers\Council\GuideAllocationController::class)->except('show');
+    Route::resource('guidegroup',App\Http\Controllers\Council\GuideGroupController::class)->except('show');
 });
 // Route::middleware(['auth','role:admin'])->group(function() {
     Route::get('/admin', App\Http\Controllers\Admin\DasboardController::class)->name('admin.home');
