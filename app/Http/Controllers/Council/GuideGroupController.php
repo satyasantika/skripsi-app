@@ -12,9 +12,9 @@ class GuideGroupController extends Controller
 {
     public function index()
     {
-        // $guidegroup = GuideAllocation::where('year','2021')->get();
-        $guidegroup = GuideGroup::where('year','2021')->get();
-        return view('council.guidegroup.home',compact('guidegroup'));
+        $guideallocations = GuideAllocation::where('year','2021')->oldest()->get();
+        $guidegroups = GuideGroup::join('guide_allocation_id',$guideallocations)->get();
+        return view('council.guidegroup.home',compact('guidegroups'));
     }
 
     public function create()

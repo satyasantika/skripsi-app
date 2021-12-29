@@ -29,7 +29,7 @@ class GuideAllocationController extends Controller
             ['lecture_id','=',$request->lecture_id],
             ['year','=','2021'],
             ])->doesntExist()) {
-            Allocation::create($input);
+            GuideAllocation::create($input);
         }
         return $this->index();
     }

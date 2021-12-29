@@ -28,5 +28,15 @@ class UsersImport implements ToCollection
             $user = User::where('email',$row[3])->first();
             $user->assignRole($row[6]);
         }
+        $user = User::where('email','satyasantika@unsil.ac.id')->first();
+        $user->assignRole('admin');
+        $user->assignRole('council');
+        $user = User::where('email','vepiapiati@unsil.ac.id')->first();
+        $user->assignRole('council');
+        $user = User::where('email','edihidayat@unsil.ac.id')->first();
+        $user->assignRole('council');
+        $user = User::where('email','naniratnaningsih@unsil.ac.id')->first();
+        $user->assignRole('council');
+
     }
 }

@@ -53,6 +53,24 @@
                                 </li>
                             @endif
                         @else
+                            @hasanyrole('admin|council')
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdownRole" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ __('Peran Lain') }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownRole">
+                                    @role('admin')
+                                    {{-- Admin dashboard --}}
+                                    <a class="dropdown-item" href="{{ route('admin.home') }}">{{ __('Admin') }}</a>
+                                    @endrole
+                                    @role('council')
+                                    {{-- Jurusan dashboard --}}
+                                    <a class="dropdown-item" href="{{ route('council.home') }}">{{ __('Council') }}</a>
+                                    @endrole
+                                </div>
+                            </li>
+                            @endhasanyrole
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}

@@ -41,7 +41,7 @@ class GuideDecisionController extends Controller
 
     private function _quota($lecture_id)
     {
-        $allocation = Allocation::where([
+        $allocation = GuideAllocation::where([
                     ['lecture_id','=',$lecture_id],
                     ['year','=','2021']
                     ])->first()->guide_all;
