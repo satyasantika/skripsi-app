@@ -26,7 +26,8 @@ Route::group(['middleware' => 'auth'], function() {
 Route::middleware(['auth','role:student'])->group(function() {
     Route::get('/student', App\Http\Controllers\Student\DasboardController::class)->name('student.home');
     Route::resource('submission',App\Http\Controllers\Student\SubmissionController::class)->except('show');
-    Route::resource('guidesubmission',App\Http\Controllers\Student\GuideSubmissionController::class)->except('show');
+    Route::resource('guidesubmission',App\Http\Controllers\Student\GuideSubmissionController::class)->except(['show','create']);
+    Route::get('guidesubmission/create{order}',[App\Http\Controllers\Student\GuideSubmissionController::class,'createGuideSubmission'])->name('guidesubmission.createGuideSubmission');
 });
 Route::middleware(['auth','role:lecture'])->group(function() {
     Route::get('/lecture', App\Http\Controllers\Lecture\DasboardController::class)->name('lecture.home');

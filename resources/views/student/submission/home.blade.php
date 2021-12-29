@@ -22,56 +22,29 @@
                             <a href="{{ $submission->document ?? "" }}">{{ $submission->document ?? "belum ada" }}</a>
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-md-auto">
-                            {{-- Tombol pilih pembimbing --}}
-                            @if ($guidesubmissions->count() < 2)
-                            <a href="{{ route('guidesubmission.create',$submission) }}" class="btn btn-primary">Pilih Pembimbing</a>
-                            @endif
+                    {{-- Pilih Pembimbing --}}
+                        <div class="row mb-3">
+                            <div class="col-md-auto">
+                                Pembimbing 1:
+                                @if ($guide1)
+                                {{ $guide1->guide_group->guide_allocation->user->name }}
+                                <a href="{{ route('guidesubmission.edit',$guide1) }}" class="btn btn-sm btn-primary float-end">Edit</a>
+                                @else
+                                <a href="{{ route('guidesubmission.createGuideSubmission',1) }}" class="btn btn-primary">Pilih Pembimbing 1</a>
+                                @endif
+                            </div>
                         </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-md-12">
-                            <table class="table table-responsive">
-                                <thead class="">
-                                    <tr>
-                                        <th></th>
-                                        <th>Nama Dosen</th>
-                                        <th>Status Ajuan</th>
-                                        <th>Urutan Pembimbing</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse ($guidesubmissions as $guidesubmission)
-                                    <tr>
-                                        <td><a href="{{ route('guidesubmission.edit',$guidesubmission) }}" class="btn btn-sm btn-primary">edit</a></td>
-                                        <td>{{ $guidesubmission->user->name }}</td>
-                                        <td>@if (is_null($guidesubmission->is_approve))
-                                            <span class="badge bg-warning">Menunggu respons...</span>
-                                            @elseif ($guidesubmission->is_approve)
-                                            <span class="badge bg-success">Ajuan Diterima</span>
-                                            @else
-                                            <span class="badge bg-danger">Ajuan Ditolak</span>
-                                            @endif
-                                        </td>
-                                        <td>@if (is_null($guidesubmission->guide_order))
-                                            <span class="bg-warning">Menunggu DBS...</span>
-                                            @else
-                                            {{ $guidesubmission->guide_order }}
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    @empty
-                                    <tr>
-                                        <td colspan="5" class="bg-warning">
-                                            belum ada ajuan pembimbing
-                                        </td>
-                                    </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
+                        <div class="row mb-3">
+                            <div class="col-md-auto">
+                                Pembimbing 2:
+                                @if ($guide2)
+                                {{ $guide2->guide_group->guide_allocation->user->name }}
+                                <a href="{{ route('guidesubmission.edit',$guide2) }}" class="btn btn-sm btn-primary float-end">Edit</a>
+                                @else
+                                <a href="{{ route('guidesubmission.createGuideSubmission',2) }}" class="btn btn-primary">Pilih Pembimbing 2</a>
+                                @endif
+                            </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>

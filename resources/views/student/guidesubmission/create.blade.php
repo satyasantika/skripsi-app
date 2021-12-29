@@ -12,12 +12,14 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Pilih Pembimbing') }}</label>
+                            <label for="guide_group_id" class="col-md-4 col-form-label text-md-right">{{ __('Pembimbing ').$order }}</label>
 
-                            <div class="col-md-6">
-                                <select id="title" name="lecture_id" class="form-select" aria-label="Default select example" required>
-                                    @foreach ($lectures as $lecture)
-                                        <option value="{{ $lecture->id }}">{{ $lecture->name }}</option>
+                            <div class="col-md-8">
+                                <select id="guide_group_id" name="guide_group_id" class="form-select" aria-label="Default select example" required>
+                                    @foreach ($guides as $guide)
+                                        <option value="{{ $guide->id }}">
+                                            {{ $guide->name }} ({{ $order ==  1 ? $guide->guide_1 : $guide->guide_2 }})
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>

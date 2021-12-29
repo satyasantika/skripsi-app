@@ -19,13 +19,11 @@ class CreateGuidesTable extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreignUuid('lecture_id')
-                ->references('id')->on('users')
+            $table->foreignUuid('guide_group_id')
+                ->references('id')->on('guide_groups')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->boolean('is_approve')->nullable();
-            $table->unsignedTinyInteger('guide_order')->nullable();
-            $table->boolean('is_acc')->nullable();
             $table->timestamps();
         });
     }

@@ -66,7 +66,7 @@
                     <label for="title" class="col-md-4 col-form-label text-md-right">Calon Pembimbing</label>
                     <div class="col-md-6">
                         @forelse ($guidesubmissions as $guidesubmission)
-                            {{ $guidesubmission->user->name }}
+                            {{ $guidesubmission->guide_group->guide_allocation->user->name }}
                             @if (is_null($guidesubmission->is_approve))
                             <span class="badge bg-warning">Menunggu respon...</span>
                             @elseif ($guidesubmission->is_approve)

@@ -11,11 +11,6 @@ class Guide extends Model
     use Uuids, HasFactory;
     protected $guarded = [];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class,'lecture_id','id');
-    }
-
     public function submission()
     {
         return $this->belongsTo(Submission::class);

@@ -19,7 +19,15 @@ class SubmissionController extends Controller
         }
         $submission = $submission->first();
         $guidesubmissions = Guide::where('submission_id',$submission->id)->get();
-        return view('student.submission.home',compact('submission','guidesubmissions'));
+        $guide1 = Guide::join('guide_groups','guides.guide_group_id','=','guide_groups.id')
+                        ->select('guides.*')
+                        ->where('guide_groups.guide_1','>',0)
+                        ->first();
+        $guide2 = Guide::join('guide_groups','guides.guide_group_id','=','guide_groups.id')
+                        ->select('guides.*')
+                        ->where('guide_groups.guide_2','>',0)
+                        ->first();
+        return view('student.submission.home',compact('guide1','guide2','submission','guidesubmissions'));
     }
 
     public function create()
