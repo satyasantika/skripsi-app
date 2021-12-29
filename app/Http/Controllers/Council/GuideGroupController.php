@@ -12,14 +12,15 @@ class GuideGroupController extends Controller
 {
     public function index()
     {
-        $guideallocations = GuideAllocation::where('year','2021')->oldest()->get();
-        $guidegroups = GuideGroup::join('guide_allocation_id',$guideallocations)->get();
-        return view('council.guidegroup.home',compact('guidegroups'));
+        // $guideallocations = GuideAllocation::where('year','2021')->oldest()->get();
+        $groups = GuideGroup::select('group')->groupBy('group')->get();
+
+        return view('council.guidegroup.home',compact('groups'));
     }
 
     public function create()
     {
-        $lectures = User::role('lecture')->get();
+        $lectures = $this->_orderedLecture(2021);
         return view('council.guidegroup.create',compact('lectures'));
     }
 
@@ -43,8 +44,9 @@ class GuideGroupController extends Controller
 
     public function edit(GuideGroup $guidegroup)
     {
-        $lectures = User::role('lecture')->get();
-        return view('council.guidegroup.edit',compact('GuideGroup','lectures'));
+        $lectures = $this->_orderedLecture(2021);
+        // dd($lectures);
+        return view('council.guidegroup.edit',compact('guidegroup','lectures'));
     }
 
     public function update(Request $request, GuideGroup $guidegroup)
@@ -58,5 +60,15 @@ class GuideGroupController extends Controller
     {
         $guidegroup->delete();
         return $this->index();
+    }
+
+    private function _orderedLecture($year)
+    {
+        // return User::role('lecture')->orderBy('name')->get();
+        return GuideAllocation::join('users','guide_allocations.lecture_id','=','users.id')
+                                ->select('users.name','guide_allocations.*')
+                                ->where('guide_allocations.year','=',$year)
+                                ->orderBy('users.name')
+                                ->get();
     }
 }
