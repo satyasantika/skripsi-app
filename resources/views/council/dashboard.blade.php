@@ -22,6 +22,11 @@
                             <a href="{{ route('submissionlist.home') }}" class="btn btn-primary">List Ajuan Mahasiswa</a>
                         </div>
                     </div>
+                    <div class="row mb-1">
+                        <div class="col-md-auto">
+                            <a href="{{ route('guideallocation.usage') }}" class="btn btn-primary">Ketersediaan Kuota Pembimbing</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

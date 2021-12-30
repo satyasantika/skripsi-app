@@ -38,6 +38,7 @@ Route::middleware(['auth','role:council'])->group(function() {
     Route::resource('guideallocation',App\Http\Controllers\Council\GuideAllocationController::class)->except('show');
     Route::resource('guidegroup',App\Http\Controllers\Council\GuideGroupController::class)->except('show');
     Route::get('/submissionlist',App\Http\Controllers\Council\GuideSubmissionController::class)->name('submissionlist.home');
+    Route::get('/guideusage',App\Http\Controllers\Council\GuideUsageController::class)->name('guideallocation.usage');
 });
 // Route::middleware(['auth','role:admin'])->group(function() {
     Route::get('/admin', App\Http\Controllers\Admin\DasboardController::class)->name('admin.home');
