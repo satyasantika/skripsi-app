@@ -7,12 +7,19 @@
             <div class="card">
                 <div class="card-header">{{ __('Dashboard DBS') }}</div>
                 <div class="card-body">
-                    <div class="row mb-3">
+                    <div class="row mb-1">
                         <div class="col-md-auto">
                             <a href="{{ route('guideallocation.index') }}" class="btn btn-primary">Penetapan Kuota Pembimbing</a>
                         </div>
-                        <div class="col-md-auto mt-2">
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-md-auto">
                             <a href="{{ route('guidegroup.index') }}" class="btn btn-primary">Penetapan Kelompok Pembimbing</a>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-md-auto">
+                            <a href="{{ route('submissionlist.home') }}" class="btn btn-primary">List Ajuan Mahasiswa</a>
                         </div>
                     </div>
                 </div>
