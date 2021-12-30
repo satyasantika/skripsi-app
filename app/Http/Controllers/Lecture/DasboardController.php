@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Lecture;
 
 use App\Models\Guide;
+use App\Models\Submission;
 use App\Models\GuideAllocation;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -12,20 +13,18 @@ class DasboardController extends Controller
     public function __invoke()
     {
         $user = Auth::user();
-        $submission = Submission::join('users','submissions.student_id','=','users.id')
-                                            ->select('users.name','submissions.*')
-                                            ->where('submissions.student_id','=',$user->id);
-        $guides = Guide::joinSub($submission,'submissions',function($join){
+        $submissions = Submission::join('users','submissions.student_id','=','users.id')
+                                            ->select('users.name','submissions.*');
+        $guides = Guide::joinSub($submissions,'submissions',function($join){
                             $join->on('guides.submission_id','=','submissions.id');
                         })
-                        // join('guide_groups','guides.guide_group_id','=','guide_groups.id')
+                        ->join('guide_groups','guides.guide_group_id','=','guide_groups.id')
+                        ->select('guides.*')
                         ->where('guide_groups.guide_allocation_id',$this->_allocation($user->id)->id);
         if ($this->_quota($user->id,1) > 0 || $this->_quota($user->id,2) > 0) {
-            $guides = $guides->get();
+            $guides = $guides->orderBy('submissions.name')->get();
         } else {
-            $guides = $guides->where('guides.is_approve',1)
-                        // ->latest()
-                        ->get();
+            $guides = $guides->where('guides.is_approve',1)->orderBy('submissions.name')->get();
         }
         return view('lecture.dashboard',compact('user','guides'));
     }
