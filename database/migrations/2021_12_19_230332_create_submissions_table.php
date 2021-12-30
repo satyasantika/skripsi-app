@@ -21,6 +21,7 @@ class CreateSubmissionsTable extends Migration
                 ->onDelete('cascade');
             $table->text('title')->nullable();
             $table->string('document')->nullable();
+            $table->boolean('is_expired')->default(0);
             $table->timestamps();
         });
     }

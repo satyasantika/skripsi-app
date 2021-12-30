@@ -26,11 +26,21 @@ class GuideSubmissionController extends Controller
 
     public function store(Request $request)
     {
+        // validation
+        $currents = Guide::where('submission_id',$request->submission_id)->get();
+        $guide_group = GuideGroup::find($request->guide_group_id);
+        $order_new = $guide_group->guide_1 == 0 ? 2 : 1;
+        foreach ($currents as $current) {
+            $order_current = $current->guide_group->guide_1 == 0 ? 2 : 1;
+            if ($order_current == $order_new) {
+                return $this->index();
+            }
+        }
+        // store process
         $input = $request->all();
         $input['submission_id'] = $this->_submissionId();
         $guide_submission_by_id = Guide::where('submission_id',$this->_submissionId());
         $guide_group_by_id = GuideGroup::find($request->guide_group_id);
-        // dd($guide_group_by_id->guide_2);
         if (
             $guide_submission_by_id->count() < 2 &&
             $guide_submission_by_id->where('guide_group_id',$request->guide_group_id)->doesntExist() &&
@@ -52,6 +62,9 @@ class GuideSubmissionController extends Controller
 
     public function edit(Guide $guidesubmission)
     {
+        if ($guidesubmission->is_approve) {
+            return $this->index();
+        }
         $order = $guidesubmission->guide_group->guide_1 == 0 ? 2 : 1;
         $guides = $this->_guideChoice($order);
         return view('student.guidesubmission.edit',compact('guidesubmission','guides','order'));
@@ -59,6 +72,10 @@ class GuideSubmissionController extends Controller
 
     public function update(Request $request, Guide $guidesubmission)
     {
+        if ($guidesubmission->is_approve) {
+            return $this->index();
+        }
+
         $input = $request->all();
         $guidesubmission->update($input);
         return $this->index();

@@ -31,7 +31,11 @@
                             <a href="{{ route('guidesubmission.createGuideSubmission',1) }}" class="btn btn-primary">Pilih Pembimbing 1</a>
                             @else
                             {{-- jika sudah memilih pembimbing 1 --}}
+                            @if ($guide1->is_approve)
+                            <a class="btn btn-sm btn-outline-success">OK</a>
+                            @else
                             <a href="{{ route('guidesubmission.edit',$guide1) }}" class="btn btn-sm btn-primary">Edit</a>
+                            @endif
                             {{ $guide1->guide_group->guide_allocation->user->name }}
                                 @if (is_null($guide1->is_approve))
                                 <span class="badge bg-warning">Menunggu respon...</span>
@@ -47,11 +51,15 @@
                             <div class="col-md-auto">
                             Pembimbing 2:<br>
                             @if (is_null($guide2))
-                            {{-- Jika belum memilih pembimbing 1 --}}
+                            {{-- Jika belum memilih pembimbing 2 --}}
                             <a href="{{ route('guidesubmission.createGuideSubmission',2) }}" class="btn btn-primary">Pilih Pembimbing 2</a>
                             @else
-                            {{-- jika sudah memilih pembimbing 1 --}}
+                            {{-- jika sudah memilih pembimbing 2 --}}
+                            @if ($guide2->is_approve)
+                            <a class="btn btn-sm btn-outline-success">OK</a>
+                            @else
                             <a href="{{ route('guidesubmission.edit',$guide2) }}" class="btn btn-sm btn-primary">Edit</a>
+                            @endif
                             {{ $guide2->guide_group->guide_allocation->user->name }}
                                 @if (is_null($guide2->is_approve))
                                 <span class="badge bg-warning">Menunggu respon...</span>

@@ -10,31 +10,31 @@
                 <div class="card-body">
                     <div class="row mb-2">
                         <label class="col-md-4 col-form-label text-md-right">{{ __('Nama') }}</label>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <b>{{ $user->name }}</b>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <label class="col-md-4 col-form-label text-md-right">{{ __('NPM') }}</label>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <b>{{ $user->username }}</b>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <label class="col-md-4 col-form-label text-md-right">{{ __('email') }}</label>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <b>{{ $user->email }}</b>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <label class="col-md-4 col-form-label text-md-right">{{ __('WA') }}</label>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <b>0{{ $user->phone }}</b>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <label class="col-md-4 col-form-label text-md-right">{{ __('alamat') }}</label>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <b>{{ $user->address }}</b>
                         </div>
                     </div>
@@ -52,19 +52,19 @@
                 @else
                 <div class="row mb-3">
                     <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Judul Penelitian') }}</label>
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <b>{{ $submission->title }}</b>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Link Dokumen Pendukung') }}</label>
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <b><a href="{{ $submission->document ?? "" }}">{{ $submission->document ?? "belum ada" }}</a></b>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="title" class="col-md-4 col-form-label text-md-right">Calon Pembimbing</label>
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         @forelse ($guidesubmissions as $guidesubmission)
                             {{ $guidesubmission->guide_group->guide_allocation->user->name }}
                             @if (is_null($guidesubmission->is_approve))

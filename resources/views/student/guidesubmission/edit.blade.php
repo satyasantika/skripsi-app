@@ -16,7 +16,7 @@
                             <label for="guide_group_id" class="col-md-4 col-form-label text-md-right">{{ __('Pembimbing ').$order }}</label>
 
                             <div class="col-md-8">
-                                <select id="guide_group_id" name="guide_group_id" class="form-select" aria-label="Default select example" required>
+                                <select id="guide_group_id" name="guide_group_id" class="form-select" aria-label="Default select example" required {{ is_null($guidesubmission->is_approve) ? '' : 'disabled' }}>
                                     @foreach ($guides as $guide)
                                     @php
                                         $booking = App\Models\Guide::where('guide_group_id',$guide->id)->count();
