@@ -22,11 +22,14 @@ class SubmissionController extends Controller
         $guide1 = Guide::join('guide_groups','guides.guide_group_id','=','guide_groups.id')
                         ->select('guides.*')
                         ->where('guide_groups.guide_1','>',0)
+                        ->where('submission_id',$submission->id)
                         ->first();
         $guide2 = Guide::join('guide_groups','guides.guide_group_id','=','guide_groups.id')
                         ->select('guides.*')
                         ->where('guide_groups.guide_2','>',0)
+                        ->where('submission_id',$submission->id)
                         ->first();
+                        // dd($guide1);
         return view('student.submission.home',compact('guide1','guide2','submission','guidesubmissions'));
     }
 

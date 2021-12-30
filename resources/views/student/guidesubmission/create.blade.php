@@ -17,8 +17,19 @@
                             <div class="col-md-8">
                                 <select id="guide_group_id" name="guide_group_id" class="form-select" aria-label="Default select example" required>
                                     @foreach ($guides as $guide)
+                                    @php
+                                        $booking = App\Models\Guide::where('guide_group_id',$guide->id)->count();
+                                        $remaining_guide_1 = $guide->guide_1 - $booking;
+                                        $remaining_guide_2 = $guide->guide_2 - $booking;
+                                    @endphp
                                         <option value="{{ $guide->id }}">
-                                            {{ $guide->name }} ({{ $order ==  1 ? $guide->guide_1 : $guide->guide_2 }})
+                                            {{ $guide->name }} (
+                                                @if ($order ==  1)
+                                                    {{ $remaining_guide_1 == 0 ? 'kuota habis' : 'tersedia '.$remaining_guide_1 }}
+                                                @else
+                                                    {{ $remaining_guide_2 == 0 ? 'kuota habis' : 'tersedia '.$remaining_guide_2 }}
+                                                @endif
+                                                )
                                         </option>
                                     @endforeach
                                 </select>

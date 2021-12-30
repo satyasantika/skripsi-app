@@ -23,26 +23,44 @@
                         </div>
                     </div>
                     {{-- Pilih Pembimbing --}}
-                        <div class="row mb-3">
-                            <div class="col-md-auto">
-                                Pembimbing 1:
-                                @if ($guide1)
-                                {{ $guide1->guide_group->guide_allocation->user->name }}
-                                <a href="{{ route('guidesubmission.edit',$guide1) }}" class="btn btn-sm btn-primary float-end">Edit</a>
+                    <div class="row mb-3">
+                        <div class="col-md-auto">
+                            Pembimbing 1:<br>
+                            @if (is_null($guide1))
+                            {{-- Jika belum memilih pembimbing 1 --}}
+                            <a href="{{ route('guidesubmission.createGuideSubmission',1) }}" class="btn btn-primary">Pilih Pembimbing 1</a>
+                            @else
+                            {{-- jika sudah memilih pembimbing 1 --}}
+                            <a href="{{ route('guidesubmission.edit',$guide1) }}" class="btn btn-sm btn-primary">Edit</a>
+                            {{ $guide1->guide_group->guide_allocation->user->name }}
+                                @if (is_null($guide1->is_approve))
+                                <span class="badge bg-warning">Menunggu respon...</span>
+                                @elseif ($guide1->is_approve)
+                                <span class="badge bg-success">Ajuan Diterima</span>
                                 @else
-                                <a href="{{ route('guidesubmission.createGuideSubmission',1) }}" class="btn btn-primary">Pilih Pembimbing 1</a>
+                                <span class="badge bg-danger">Ajuan Ditolak</span>
                                 @endif
+                            @endif
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-auto">
-                                Pembimbing 2:
-                                @if ($guide2)
-                                {{ $guide2->guide_group->guide_allocation->user->name }}
-                                <a href="{{ route('guidesubmission.edit',$guide2) }}" class="btn btn-sm btn-primary float-end">Edit</a>
+                            Pembimbing 2:<br>
+                            @if (is_null($guide2))
+                            {{-- Jika belum memilih pembimbing 1 --}}
+                            <a href="{{ route('guidesubmission.createGuideSubmission',2) }}" class="btn btn-primary">Pilih Pembimbing 2</a>
+                            @else
+                            {{-- jika sudah memilih pembimbing 1 --}}
+                            <a href="{{ route('guidesubmission.edit',$guide2) }}" class="btn btn-sm btn-primary">Edit</a>
+                            {{ $guide2->guide_group->guide_allocation->user->name }}
+                                @if (is_null($guide2->is_approve))
+                                <span class="badge bg-warning">Menunggu respon...</span>
+                                @elseif ($guide2->is_approve)
+                                <span class="badge bg-success">Ajuan Diterima</span>
                                 @else
-                                <a href="{{ route('guidesubmission.createGuideSubmission',2) }}" class="btn btn-primary">Pilih Pembimbing 2</a>
+                                <span class="badge bg-danger">Ajuan Ditolak</span>
                                 @endif
+                            @endif
                             </div>
                         </div>
                 </div>

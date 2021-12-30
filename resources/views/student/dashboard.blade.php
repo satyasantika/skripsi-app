@@ -17,25 +17,25 @@
                     <div class="row mb-2">
                         <label class="col-md-4 col-form-label text-md-right">{{ __('NPM') }}</label>
                         <div class="col-md-6">
-                            {{ $user->username }}
+                            <b>{{ $user->username }}</b>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <label class="col-md-4 col-form-label text-md-right">{{ __('email') }}</label>
                         <div class="col-md-6">
-                            {{ $user->email }}
+                            <b>{{ $user->email }}</b>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <label class="col-md-4 col-form-label text-md-right">{{ __('WA') }}</label>
                         <div class="col-md-6">
-                            <a href="https://wa.me/62{{ $user->phone }}">0{{ $user->phone }}</a>
+                            <b>0{{ $user->phone }}</b>
                         </div>
                     </div>
                     <div class="row mb-2">
                         <label class="col-md-4 col-form-label text-md-right">{{ __('alamat') }}</label>
                         <div class="col-md-6">
-                            {{ $user->address }}
+                            <b>{{ $user->address }}</b>
                         </div>
                     </div>
                 </div>
@@ -53,13 +53,13 @@
                 <div class="row mb-3">
                     <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Judul Penelitian') }}</label>
                     <div class="col-md-6">
-                        {{ $submission->title }}
+                        <b>{{ $submission->title }}</b>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Link Dokumen Pendukung') }}</label>
                     <div class="col-md-6">
-                        <a href="{{ $submission->document ?? "" }}">{{ $submission->document ?? "belum ada" }}</a>
+                        <b><a href="{{ $submission->document ?? "" }}">{{ $submission->document ?? "belum ada" }}</a></b>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -74,6 +74,7 @@
                             @else
                             <span class="badge bg-danger">Ajuan Ditolak</span>
                             @endif
+                            <br>
                         @empty
                             Belum ada pengusulan
                         @endforelse

@@ -8,6 +8,7 @@ use App\Models\GuideGroup;
 use App\Models\Submission;
 use Illuminate\Http\Request;
 use App\Models\GuideAllocation;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,8 +28,17 @@ class GuideSubmissionController extends Controller
     {
         $input = $request->all();
         $input['submission_id'] = $this->_submissionId();
-
-        if (Guide::where('submission_id',$this->_submissionId())->count() <= 2) {
+        $guide_submission_by_id = Guide::where('submission_id',$this->_submissionId());
+        $guide_group_by_id = GuideGroup::find($request->guide_group_id);
+        // dd($guide_group_by_id->guide_2);
+        if (
+            $guide_submission_by_id->count() < 2 &&
+            $guide_submission_by_id->where('guide_group_id',$request->guide_group_id)->doesntExist() &&
+            (
+                Guide::where('guide_group_id',$request->guide_group_id)->count() < $guide_group_by_id->guide_1 ||
+                Guide::where('guide_group_id',$request->guide_group_id)->count() < $guide_group_by_id->guide_2
+                )
+            ) {
             Guide::create($input);
         }
 
@@ -42,8 +52,9 @@ class GuideSubmissionController extends Controller
 
     public function edit(Guide $guidesubmission)
     {
-        $lectures = $this->_orderedGuide1(2021);
-        return view('student.guidesubmission.edit',compact('guidesubmission','lectures'));
+        $order = $guidesubmission->guide_group->guide_1 == 0 ? 2 : 1;
+        $guides = $this->_guideChoice($order);
+        return view('student.guidesubmission.edit',compact('guidesubmission','guides','order'));
     }
 
     public function update(Request $request, Guide $guidesubmission)
@@ -86,9 +97,9 @@ class GuideSubmissionController extends Controller
         } else {
             $group = GuideGroup::find($guidesubmission->first()->guide_group_id)->group;
             if ($order == 1) {
-                return $this->_orderedGuide1Group(2021,$group);
+                return $this->_orderedGuide1ByGroup(2021,$group);
             } else {
-                return $this->_orderedGuide2Group(2021,$group);
+                return $this->_orderedGuide2ByGroup(2021,$group);
             }
         }
     }
@@ -98,9 +109,10 @@ class GuideSubmissionController extends Controller
         $guideallocation = GuideAllocation::join('users','guide_allocations.lecture_id','=','users.id')
                                             ->select('users.name','guide_allocations.*')
                                             ->where('guide_allocations.year','=',$year);
-        return GuideGroup::joinSub($guideallocation,'guideallocation',function($join){
-                            $join->on('guide_groups.guide_allocation_id','=','guideallocation.id');
-                        })->select('guide_groups.*','guideallocation.name');
+        return GuideGroup::joinSub($guideallocation,'guide_allocations',function($join){
+                            $join->on('guide_groups.guide_allocation_id','=','guide_allocations.id');
+                        })
+                        ->select('guide_groups.*','guide_allocations.name');
     }
 
     // List pembimbing 1 yang dipilih pertama kali
@@ -108,7 +120,7 @@ class GuideSubmissionController extends Controller
     {
         return $this->_guideallocations($year)
                         ->where('guide_groups.guide_1','>',0)
-                        ->orderBy('guideallocation.name')
+                        ->orderBy('guide_allocations.name')
                         ->get();
     }
 
@@ -117,31 +129,27 @@ class GuideSubmissionController extends Controller
     {
         return $this->_guideallocations($year)
                         ->where('guide_groups.guide_2','>',0)
-                        ->orderBy('guideallocation.name')
+                        ->orderBy('guide_allocations.name')
                         ->get();
     }
 
     // List pembimbing 1 yang dipilih setelah pembimbing 2
-    private function _orderedGuide1Group($year,$group='')
+    private function _orderedGuide1ByGroup($year,$group='')
     {
-        // return GuideGroup::join('users','guide_allocations.lecture_id','=','users.id')
-        //                     ->join('guide_allocations','guide_allocations.id','=','guide_gorups.guide_allocation_id')
-        //                     ->select('users.name','guide_groups.*')
-        //                     ->where('guide_allocations.year','=',$year)
         return $this->_guideallocations($year)
                             ->where('guide_groups.guide_1','>',0)
                             ->where('guide_groups.group','=',$group)
-                            ->orderBy('guideallocation.name')
+                            ->orderBy('guide_allocations.name')
                             ->get();
     }
 
     // List pembimbing 2 yang dipilih setelah pembimbing 1
-    private function _orderedGuide2Group($year,$group='')
+    private function _orderedGuide2ByGroup($year,$group='')
     {
         return $this->_guideallocations($year)
                             ->where('guide_groups.guide_2','>',0)
                             ->where('guide_groups.group','=',$group)
-                            ->orderBy('guideallocation.name')
+                            ->orderBy('guide_allocations.name')
                             ->get();
     }
 

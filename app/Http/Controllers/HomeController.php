@@ -16,14 +16,14 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $role = $user->getRoleNames()->first();
-        if ($role === 'admin') {
-            return redirect()->route('admin.home');
-        }
         if ($role === 'student') {
             return redirect()->route('student.home');
         }
         if ($role === 'lecture') {
             return redirect()->route('lecture.home');
+        }
+        if ($role === 'admin') {
+            return redirect()->route('admin.home');
         }
         if ($role === 'council') {
             return redirect()->route('council.home');
