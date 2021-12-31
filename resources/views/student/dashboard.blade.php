@@ -6,7 +6,10 @@
         <div class="col-md-8">
             {{-- Profil --}}
             <div class="card">
-                <div class="card-header">{{ __('Dashboard Mahasiswa') }}</div>
+                <div class="card-header">
+                    {{ __('Dashboard Mahasiswa') }}
+                    <a href="{{ route('studentprofile.edit',$user) }}" class="btn btn-sm btn-primary float-end">Edit Profil</a>
+                </div>
                 <div class="card-body">
                     <div class="row mb-2">
                         <label class="col-md-4 col-form-label text-md-right">{{ __('Nama') }}</label>
@@ -14,12 +17,12 @@
                             <b>{{ $user->name }}</b>
                         </div>
                     </div>
-                    <div class="row mb-2">
+                    {{-- <div class="row mb-2">
                         <label class="col-md-4 col-form-label text-md-right">{{ __('NPM') }}</label>
                         <div class="col-md-8">
                             <b>{{ $user->username }}</b>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="row mb-2">
                         <label class="col-md-4 col-form-label text-md-right">{{ __('email') }}</label>
                         <div class="col-md-8">

@@ -11,7 +11,6 @@
                     <form method="POST" action="{{ route('guidegroup.update',$guidegroup) }}">
                         @method('PUT')
                         @csrf
-                        {{-- <input type="hidden" name="guide_allocation_id" value="{{ $guidegroup->guide_allocation_id }}"> --}}
 
                         <div class="row mb-3">
                             <label for="guide_allocation_id" class="col-md-4 col-form-label text-md-right">{{ __('Nama Dosen') }}</label>

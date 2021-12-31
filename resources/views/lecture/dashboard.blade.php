@@ -20,7 +20,7 @@
                             <br>
                             Judul: <b>{{ $guide->submission->title }}</b>
                             <br>
-                            <a href="{{ $guide->submission->document ?? "" }}">{{ $guide->submission->document ?? "belum ada pendukungn dokumen" }}</a>
+                            <a href="{{ $guide->submission->document ?? "" }}">{{ $guide->submission->document ?? "belum ada pendukung dokumen" }}</a>
                             <div>
                                 @if (is_null($guide->is_approve))
                                 <a href="{{ route('guidedecision.edit',$guide) }}" class="btn btn-sm btn-primary">AMBIL KEPUTUSAN</a>

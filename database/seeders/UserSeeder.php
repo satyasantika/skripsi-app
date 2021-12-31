@@ -19,8 +19,8 @@ class UserSeeder extends Seeder
     {
         $filename = base_path().'/database/seeders/csv/lectures.csv';
         Excel::import(new UsersImport, $filename);
-        $filename = base_path().'/database/seeders/csv/common.csv';
-        Excel::import(new UsersImport, $filename);
+        // $filename = base_path().'/database/seeders/csv/common.csv';
+        // Excel::import(new UsersImport, $filename);
         $filename = base_path().'/database/seeders/csv/allocations.csv';
         Excel::import(new GuideAllocationsImport, $filename);
         $filename = base_path().'/database/seeders/csv/groups.csv';

@@ -28,6 +28,7 @@ Route::middleware(['auth','role:student'])->group(function() {
     Route::resource('submission',App\Http\Controllers\Student\SubmissionController::class)->except('show');
     Route::get('guidesubmission/create{order}',[App\Http\Controllers\Student\GuideSubmissionController::class,'createGuideSubmission'])->name('guidesubmission.createGuideSubmission');
     Route::resource('guidesubmission',App\Http\Controllers\Student\GuideSubmissionController::class)->except(['show','create']);
+    Route::resource('studentprofile',App\Http\Controllers\Student\ProfileController::class)->only(['edit','update']);
 });
 Route::middleware(['auth','role:lecture'])->group(function() {
     Route::get('/lecture', App\Http\Controllers\Lecture\DasboardController::class)->name('lecture.home');
@@ -40,8 +41,8 @@ Route::middleware(['auth','role:council'])->group(function() {
     Route::get('/submissionlist',App\Http\Controllers\Council\GuideSubmissionController::class)->name('submissionlist.home');
     Route::get('/guideusage',App\Http\Controllers\Council\GuideUsageController::class)->name('guideallocation.usage');
 });
-// Route::middleware(['auth','role:admin'])->group(function() {
+Route::middleware(['auth','role:admin'])->group(function() {
     Route::get('/admin', App\Http\Controllers\Admin\DasboardController::class)->name('admin.home');
     Route::post('/user/search',[App\Http\Controllers\Admin\UserController::class,'search'])->name('user.search');
     Route::resource('user',App\Http\Controllers\Admin\UserController::class)->except('show');
-// });
+});
