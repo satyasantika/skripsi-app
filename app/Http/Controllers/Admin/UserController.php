@@ -65,6 +65,7 @@ class UserController extends Controller
 
     public function removeRole($user, $role)
     {
-        return $user->removeRole($role);
+        $user->removeRole($role);
+        return redirect()->route('user.show',$user);
     }
 }

@@ -28,8 +28,8 @@ class GuideSubmissionController extends Controller
     {
         // validation
         $currents = Guide::where('submission_id',$request->submission_id)->get();
-        $guide_group = GuideGroup::find($request->guide_group_id);
-        $order_new = $guide_group->guide_1 == 0 ? 2 : 1;
+        $count_of_guide_1 = GuideGroup::find($request->guide_group_id)->guide_1;
+        $order_new = $count_of_guide_1 == 0 ? 2 : 1;
         foreach ($currents as $current) {
             $order_current = $current->guide_group->guide_1 == 0 ? 2 : 1;
             if ($order_current == $order_new) {
@@ -41,14 +41,18 @@ class GuideSubmissionController extends Controller
         $input['submission_id'] = $this->_submissionId();
         $guide_submission_by_id = Guide::where('submission_id',$this->_submissionId());
         $guide_group_by_id = GuideGroup::find($request->guide_group_id);
+        if ($order_new == 1) {
+            $count_of_guide = $count_of_guide_1;
+        } else {
+            $count_of_guide = $guide_group_by_id->guide_2;
+        }
+
         if (
             $guide_submission_by_id->count() < 2 &&
             $guide_submission_by_id->where('guide_group_id',$request->guide_group_id)->doesntExist() &&
-            (
-                Guide::where('guide_group_id',$request->guide_group_id)->count() < $guide_group_by_id->guide_1 ||
-                Guide::where('guide_group_id',$request->guide_group_id)->count() < $guide_group_by_id->guide_2
-                )
-            ) {
+            Guide::where('guide_group_id',$request->guide_group_id)->count() < $count_of_guide
+            )
+        {
             Guide::create($input);
         }
 

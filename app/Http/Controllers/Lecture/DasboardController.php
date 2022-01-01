@@ -21,11 +21,7 @@ class DasboardController extends Controller
                         ->join('guide_groups','guides.guide_group_id','=','guide_groups.id')
                         ->select('guides.*')
                         ->where('guide_groups.guide_allocation_id',$this->_allocation($user->id)->id);
-        if ($this->_quota($user->id,1) > 0 || $this->_quota($user->id,2) > 0) {
             $guides = $guides->orderBy('submissions.name')->get();
-        } else {
-            $guides = $guides->where('guides.is_approve',1)->orderBy('submissions.name')->get();
-        }
         return view('lecture.dashboard',compact('user','guides'));
     }
 

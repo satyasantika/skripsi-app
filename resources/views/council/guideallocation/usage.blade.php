@@ -22,21 +22,22 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($guideallocations as $guideallocation)
-                                    @php
-                                        $guidegroup_1 = App\Models\GuideGroup::where('guide_allocation_id',$guideallocation->id)
-                                                                                ->where('guide_1','>',0)
-                                                                                ->get()->pluck('id');
-                                        $guidegroup_2 = App\Models\GuideGroup::where('guide_allocation_id',$guideallocation->id)
-                                                                                ->where('guide_2','>',0)
-                                                                                ->get()->pluck('id');
-                                        $guide_1 = App\Models\Guide::whereIn('guide_group_id',$guidegroup_1)->count();
-                                        $guide_2 = App\Models\Guide::whereIn('guide_group_id',$guidegroup_2)->count();
-                                        $order = $guideallocation->guide_1 == 0 ? 2 : 1;
-                                    @endphp
                                     <tr>
-                                        <td>{{ $guideallocation->user->name }}</td>
-                                        <td class="text-end">{{ $guideallocation->guide_1 - $guide_1 }}</td>
-                                        <td class="text-end">{{ $guideallocation->guide_2 - $guide_2 }}</td>
+                                        <td>{{ $guideallocation['name'] }}</td>
+                                        <td class="text-end">
+                                            <span class="badge bg-primary">kuota: {{ $guideallocation['guide_1_allocation'] }}</span>
+                                            <span class="badge bg-info">sisa: {{ $guideallocation['guide_1_remain'] }}</span>
+                                            <span class="badge bg-secondary">ajuan: {{ $guideallocation['guide_1_submission'] }}</span>
+                                            <span class="badge bg-success">terima: {{ $guideallocation['guide_1_accept'] }}</span>
+                                            <span class="badge bg-danger">tolak: {{ $guideallocation['guide_1_decline'] }}</span>
+                                        </td>
+                                        <td class="text-end">
+                                            <span class="badge bg-primary">kuota: {{ $guideallocation['guide_2_allocation'] }}</span>
+                                            <span class="badge bg-info">sisa: {{ $guideallocation['guide_2_remain'] }}</span>
+                                            <span class="badge bg-secondary">ajuan: {{ $guideallocation['guide_2_submission'] }}</span>
+                                            <span class="badge bg-success">terima: {{ $guideallocation['guide_2_accept'] }}</span>
+                                            <span class="badge bg-danger">tolak: {{ $guideallocation['guide_2_decline'] }}</span>
+                                        </td>
                                     </tr>
                                     @empty
                                         Belum ada ajuan judul
