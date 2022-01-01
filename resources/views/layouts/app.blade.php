@@ -60,6 +60,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownRole">
+                                    @role('lecture')
+                                    {{-- Admin dashboard --}}
+                                    <a class="dropdown-item" href="{{ route('lecture.home') }}">{{ __('Dosen') }}</a>
+                                    @endrole
                                     @role('admin')
                                     {{-- Admin dashboard --}}
                                     <a class="dropdown-item" href="{{ route('admin.home') }}">{{ __('Admin') }}</a>

@@ -34,7 +34,7 @@
                                 <tbody>
                                     @forelse ($users as $user)
                                     <tr>
-                                        <td><a href="{{ route('user.edit',$user) }}" class="btn btn-sm btn-primary">edit</a></td>
+                                        <td><a href="{{ route('user.show',$user) }}" class="btn btn-sm btn-primary">detail</a></td>
                                         <td><span class="text-primary">{{ $user->username }}</span>
                                             {{ $user->name }}
                                             <br>
@@ -51,7 +51,7 @@
                                     @endforelse
                                 </tbody>
                             </table>
-                            <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">+ Tambah Kuota</a>
+                            {{-- <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">+ Tambah Kuota</a> --}}
                         </div>
                     </div>
                 </div>

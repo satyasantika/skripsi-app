@@ -43,7 +43,6 @@
                                     @endforelse
                                 </tbody>
                             </table>
-                            <a href="{{ route('guideallocation.create') }}" class="btn btn-sm btn-primary">+ Tambah Kuota</a>
                         </div>
                     </div>
                 </div>

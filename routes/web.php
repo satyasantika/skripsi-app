@@ -43,6 +43,12 @@ Route::middleware(['auth','role:council'])->group(function() {
 });
 Route::middleware(['auth','role:admin'])->group(function() {
     Route::get('/admin', App\Http\Controllers\Admin\DasboardController::class)->name('admin.home');
+    // Route::get('/user/role/assign/{user}/as{role}',fucntion($user,$role){
+    //     $user->assignRole($role);
+    //     return redirect()->route('user.show',$user);
+    // })->name('user.role.assign');
+    Route::post('/user/role/assign/{user}',[App\Http\Controllers\Admin\UserController::class,'assignRole'])->name('user.role.assign');
+    Route::post('/user/role/remove/{user}/{role}',[App\Http\Controllers\Admin\UserController::class,'removeRole'])->name('user.role.remove');
     Route::post('/user/search',[App\Http\Controllers\Admin\UserController::class,'search'])->name('user.search');
-    Route::resource('user',App\Http\Controllers\Admin\UserController::class)->except('show');
+    Route::resource('user',App\Http\Controllers\Admin\UserController::class);
 });
