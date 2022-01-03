@@ -38,8 +38,10 @@ Route::middleware(['auth','role:council'])->group(function() {
     Route::get('/council', App\Http\Controllers\Council\DasboardController::class)->name('council.home');
     Route::resource('guideallocation',App\Http\Controllers\Council\GuideAllocationController::class)->except('show');
     Route::resource('guidegroup',App\Http\Controllers\Council\GuideGroupController::class)->except('show');
-    Route::get('/submissionlist',App\Http\Controllers\Council\GuideSubmissionController::class)->name('submissionlist.home');
+    Route::get('/council/guidesubmission/create{order}/{submission_id}',[App\Http\Controllers\Council\GuideSubmissionController::class,'createGuideSubmission'])->name('submissionlist.createGuideSubmission');
+    Route::resource('submissionlist',App\Http\Controllers\Council\GuideSubmissionController::class)->except('create','show');
     Route::get('/guideusage',App\Http\Controllers\Council\GuideUsageController::class)->name('guideallocation.usage');
+    Route::resource('forcesubmission',App\Http\Controllers\Council\SubmissionController::class)->only('create','store');
 });
 Route::middleware(['auth','role:admin'])->group(function() {
     Route::get('/admin', App\Http\Controllers\Admin\DasboardController::class)->name('admin.home');

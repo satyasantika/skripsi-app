@@ -19,7 +19,7 @@
                     </div>
                     <div class="row mb-1">
                         <div class="col-md-auto">
-                            <a href="{{ route('submissionlist.home') }}" class="btn btn-primary">List Ajuan Mahasiswa</a>
+                            <a href="{{ route('submissionlist.index') }}" class="btn btn-primary">List Ajuan Mahasiswa</a>
                         </div>
                     </div>
                     <div class="row mb-1">
