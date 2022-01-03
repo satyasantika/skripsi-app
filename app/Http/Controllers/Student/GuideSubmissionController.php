@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Student;
 
 use App\Models\User;
 use App\Models\Guide;
+use App\Models\Section;
 use App\Models\GuideGroup;
 use App\Models\Submission;
 use Illuminate\Http\Request;
@@ -39,6 +40,11 @@ class GuideSubmissionController extends Controller
         // store process
         $input = $request->all();
         $input['submission_id'] = $this->_submissionId();
+        // submission instantly accepted
+        if (Section::first()->name > 1) {
+            $input['is_approve'] = 1;
+        }
+        $input['section_order'] = Section::first()->name;
         $guide_submission_by_id = Guide::where('submission_id',$this->_submissionId());
         $guide_group_by_id = GuideGroup::find($request->guide_group_id);
         if ($order_new == 1) {

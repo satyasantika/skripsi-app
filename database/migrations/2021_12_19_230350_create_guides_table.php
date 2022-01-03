@@ -24,6 +24,7 @@ class CreateGuidesTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->boolean('is_approve')->nullable();
+            $table->string('section_order')->nullable();
             $table->timestamps();
         });
     }

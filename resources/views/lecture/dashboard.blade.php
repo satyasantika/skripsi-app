@@ -23,14 +23,20 @@
                             <a href="{{ $guide->submission->document ?? "" }}">{{ $guide->submission->document ?? "belum ada pendukung dokumen" }}</a>
                             <div>
                                 @if (is_null($guide->is_approve))
-                                <a href="{{ route('guidedecision.edit',$guide) }}" class="btn btn-sm btn-primary">AMBIL KEPUTUSAN</a>
+                                    {{-- edit button show only in section 1 --}}
+                                    @if (\App\Models\Section::first()->name == 1)
+                                    <a href="{{ route('guidedecision.edit',$guide) }}" class="btn btn-sm btn-primary">AMBIL KEPUTUSAN</a>
+                                    @endif
                                 @else
-                                @if ($guide->is_approve)
-                                <span class="badge bg-success">USULAN DITERIMA</span>
-                                @else
-                                <span class="badge bg-danger">USULAN DITOLAK</span>
-                                @endif
-                                <a href="{{ route('guidedecision.edit',$guide) }}" class="btn btn-sm btn-primary">EDIT</a>
+                                    @if ($guide->is_approve)
+                                    <span class="badge bg-success">USULAN DITERIMA</span>
+                                    @else
+                                    <span class="badge bg-danger">USULAN DITOLAK</span>
+                                    @endif
+                                    {{-- edit button show only in section 1 --}}
+                                    @if (\App\Models\Section::first()->name == 1)
+                                    <a href="{{ route('guidedecision.edit',$guide) }}" class="btn btn-sm btn-primary">EDIT</a>
+                                    @endif
                                 @endif
                             </div>
                         </div>

@@ -11,6 +11,9 @@
                         <div class="col-md-auto">
                             <a href="{{ route('user.index') }}" class="btn btn-primary">Tabel Pengguna</a>
                         </div>
+                        <div class="col-md-auto">
+                            <a href="{{ route('admin.section.edit') }}" class="btn btn-primary">Edit Tahap Pemilihan</a>
+                        </div>
                     </div>
                 </div>
             </div>

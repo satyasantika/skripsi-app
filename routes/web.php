@@ -43,6 +43,9 @@ Route::middleware(['auth','role:council'])->group(function() {
 });
 Route::middleware(['auth','role:admin'])->group(function() {
     Route::get('/admin', App\Http\Controllers\Admin\DasboardController::class)->name('admin.home');
+    Route::get('/section/edit', [App\Http\Controllers\Admin\SectionController::class,'edit'])->name('admin.section.edit');
+    Route::put('/section/edit', [App\Http\Controllers\Admin\SectionController::class,'update'])->name('admin.section.update');
+
     Route::post('/user/role/assign/{user}',[App\Http\Controllers\Admin\UserController::class,'assignRole'])->name('user.role.assign');
     Route::post('/user/role/remove/{user}',[App\Http\Controllers\Admin\UserController::class,'removeRole'])->name('user.role.remove');
     Route::post('/user/search',[App\Http\Controllers\Admin\UserController::class,'search'])->name('user.search');
