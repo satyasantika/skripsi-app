@@ -11,7 +11,7 @@ class GuideAllocationController extends Controller
 {
     public function index()
     {
-        $guideallocations = GuideAllocation::where('year','2021')
+        $guideallocations = GuideAllocation::where('year','2022')
                         ->join('users','guide_allocations.lecture_id','=','users.id')
                         ->select('guide_allocations.*')
                         ->orderBy('users.name')
@@ -28,10 +28,10 @@ class GuideAllocationController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        $input['year'] = 2021;
+        $input['year'] = 2022;
         if (GuideAllocation::where([
             ['lecture_id','=',$request->lecture_id],
-            ['year','=','2021'],
+            ['year','=','2022'],
             ])->doesntExist()) {
             GuideAllocation::create($input);
         }

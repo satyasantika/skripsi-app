@@ -44,7 +44,7 @@ class DasboardController extends Controller
     {
         return GuideAllocation::where([
                         ['lecture_id','=',Auth::id()],
-                        ['year','=','2021']
+                        ['year','=','2022']
                         ])->first();
     }
 }

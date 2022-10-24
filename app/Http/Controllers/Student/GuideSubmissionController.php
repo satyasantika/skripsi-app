@@ -117,16 +117,16 @@ class GuideSubmissionController extends Controller
         $guidesubmission = Guide::where('submission_id',$submission_id);
         if ($guidesubmission->doesntExist()) {
             if ($order == 1) {
-                return $this->_orderedGuide1First(2021);
+                return $this->_orderedGuide1First(2022);
             } else {
-                return $this->_orderedGuide2First(2021);
+                return $this->_orderedGuide2First(2022);
             }
         } else {
             $group = GuideGroup::find($guidesubmission->first()->guide_group_id)->group;
             if ($order == 1) {
-                return $this->_orderedGuide1ByGroup(2021,$group);
+                return $this->_orderedGuide1ByGroup(2022,$group);
             } else {
-                return $this->_orderedGuide2ByGroup(2021,$group);
+                return $this->_orderedGuide2ByGroup(2022,$group);
             }
         }
     }

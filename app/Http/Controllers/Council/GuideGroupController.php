@@ -19,20 +19,14 @@ class GuideGroupController extends Controller
 
     public function create()
     {
-        $lectures = $this->_orderedLecture(2021);
+        $lectures = $this->_orderedLecture(2022);
         return view('council.guidegroup.create',compact('lectures'));
     }
 
     public function store(Request $request)
     {
         $input = $request->all();
-        $input['year'] = 2021;
-        if (GuideGroup::where([
-            ['lecture_id','=',$request->lecture_id],
-            ['year','=','2021'],
-            ])->doesntExist()) {
-            GuideGroup::create($input);
-        }
+        GuideGroup::create($input);
         return $this->index();
     }
 
@@ -43,7 +37,7 @@ class GuideGroupController extends Controller
 
     public function edit(GuideGroup $guidegroup)
     {
-        $lectures = $this->_orderedLecture(2021);
+        $lectures = $this->_orderedLecture(2022);
         return view('council.guidegroup.edit',compact('guidegroup','lectures'));
     }
 

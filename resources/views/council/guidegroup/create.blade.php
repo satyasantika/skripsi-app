@@ -38,9 +38,9 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="examinator" class="col-md-4 col-form-label text-md-right">{{ __('Kelompok') }}</label>
+                            <label for="group" class="col-md-4 col-form-label text-md-right">{{ __('Kelompok') }}</label>
                             <div class="col-md-3">
-                                <input id="examinator" type="number" class="form-control" name="examinator" min="0">
+                                <input id="group" type="number" class="form-control" name="group" min="0">
                             </div>
                         </div>
 

@@ -24,7 +24,7 @@
                             ->select('guide_groups.*')
                             ->where([
                                 ['guide_groups.group','=',$group->group],
-                                ['guide_allocations.year','=',2021],
+                                ['guide_allocations.year','=',2022],
                             ])
                             ->orderBy('users.name');
                             // ->get();
